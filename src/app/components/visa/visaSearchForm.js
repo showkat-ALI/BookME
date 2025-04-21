@@ -1,16 +1,18 @@
-"use client";
+'use client';
 
-import {  useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-export default function VisaSearchForm({ initialDeparture, initialDestination, countryData }) {
-  const [departure, setDeparture] = useState(initialDeparture);
+export default function VisaSearchForm({ countryData }) {
+  // Set the first country as default
+  const [departure, setDeparture] = useState(countryData[0]?.name || '');
   const [travelers, setTravelers] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const counterRef = useRef(null);
   const dropdownRef = useRef(null);
   const router = useRouter();
+
   // Handle click outside for both dropdown and counter
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -64,7 +66,7 @@ export default function VisaSearchForm({ initialDeparture, initialDestination, c
             >
               <span className="text-xs text-gray-500 font-bold mr-1">{currentCountryCode}</span>
               <div className="w-full text-sm font-medium">
-                {departure}
+                {departure || 'Select country'}
               </div>
               <svg 
                 className={`w-4 h-4 ml-2 transition-transform ${isOpen ? 'rotate-180' : ''}`}
@@ -91,8 +93,8 @@ export default function VisaSearchForm({ initialDeparture, initialDestination, c
                       setIsOpen(false);
                     }}
                   >
-                    <span className=" text-gray-500 font-bold mr-2 w-6">{country?.code}</span>
-                    <span className=" flex-1">{country?.name}</span>
+                    <span className="text-gray-500 font-bold mr-2 w-6">{country?.code}</span>
+                    <span className="flex-1">{country?.name}</span>
                   </div>
                 ))}
               </div>
@@ -104,54 +106,49 @@ export default function VisaSearchForm({ initialDeparture, initialDestination, c
               onChange={(e) => setDeparture(e.target.value)}
             >
               {countryData.map((country) => (
-                <option key={country?.name} value={country?.name}>{country?.name}</option>
+                <option key={country?.id} value={country?.name}>{country?.name}</option>
               ))}
             </select>
           </div>
                          
           {/* Travelers */}
-          <div className="px-3 ml-[10px] py-2 rounded-lg border border-gray-200" 
-                onClick={() => setIsEditing(true)}
-
-           ref={counterRef}>
+          <div 
+            className="px-3 ml-[10px] py-2 rounded-lg border border-gray-200" 
+            onClick={() => setIsEditing(true)}
+            ref={counterRef}
+          >
             <div className="text-xs text-gray-500 mb-1">Traveller</div>
-            <div 
-                className="flex items-center relative cursor-pointer"
-            >
-                <div 
-                    className={`transition-all duration-300 ${isEditing ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'}`}
+            <div className="flex items-center relative cursor-pointer">
+              <div className={`transition-all duration-300 ${isEditing ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'}`}>
+                <span className="text-sm font-bold mr-2">{travelers}</span>
+                <span className="text-sm">Bangladesh</span>
+              </div>
+              <div className={`flex items-center transition-all duration-300 ${isEditing ? 'opacity-100 scale-100' : 'opacity-0 scale-95 absolute'}`}>
+                <button 
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    decrementTravelers();
+                  }}
+                  className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+                  disabled={travelers <= 1}
                 >
-                    <span className="text-sm font-bold mr-2">{travelers}</span>
-                    <span className="text-sm">Bangladesh</span>
-                </div>
-                <div 
-                    className={`flex items-center transition-all duration-300 ${isEditing ? 'opacity-100 scale-100' : 'opacity-0 scale-95 absolute'}`}
+                  -
+                </button>
+                <span className="text-sm font-bold mx-2 w-6 text-center">{travelers}</span>
+                <button 
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    incrementTravelers();
+                  }}
+                  className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+                  disabled={travelers >= 10}
                 >
-                    <button 
-                        type="button"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            decrementTravelers();
-                        }}
-                        className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
-                        disabled={travelers <= 1}
-                    >
-                        -
-                    </button>
-                    <span className="text-sm font-bold mx-2 w-6 text-center">{travelers}</span>
-                    <button 
-                        type="button"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            incrementTravelers();
-                        }}
-                        className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
-                        disabled={travelers >= 10}
-                    >
-                        +
-                    </button>
-                    <span className="text-sm ml-2">Bangladesh</span>
-                </div>
+                  +
+                </button>
+                <span className="text-sm ml-2">Bangladesh</span>
+              </div>
             </div>
           </div>
         </div>

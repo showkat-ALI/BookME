@@ -34,8 +34,7 @@ export default async function Home() {
       <div className="">
         <main className="container mx-auto px-4 flex flex-col items-center">
           <VisaSearchForm 
-            initialDeparture="Thailand" 
-            initialDestination="Bangladesh" 
+          
             countryData={countryData} 
           />
         </main>
