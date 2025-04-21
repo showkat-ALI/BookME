@@ -77,7 +77,7 @@ export default async function VisaDetailsPage({params}) {
               Looking for Expert Visa Guidance?
             </h3>
             <p className="text-sm sm:text-base text-black mb-3 sm:mb-4 leading-relaxed">
-              Don't know where to begin? Share your details, and our experienced visa consultants will assist you on every step.
+              Don&apos;t know where to begin? Share your details, and our experienced visa consultants will assist you on every step.
             </p>
             <div className="flex flex-col sm:flex-row sm:items-center gap-2">
               <button className="bg-[#d66f00] text-white text-sm font-semibold px-[12px] py-2 rounded hover:bg-[#D46B08] transition-colors">
