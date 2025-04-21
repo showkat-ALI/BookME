@@ -110,7 +110,7 @@ console.log(propertyPackages)
                     <h2
                       className={`font-heading text-xl text-blue-900 font-bold`}
                     >
-                      {property.property_name}
+                      {property?.property_name}
                     </h2>
                     <p className="flex text-black items-center">
                       <strong>
