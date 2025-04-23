@@ -52,7 +52,7 @@ console.log(countryData)
       <div className="container mx-auto px-4 py-12">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">Popular Visa Destinations</h2>
         <div className="flex justify-center items-center ">
-          <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
+          <div className='grid grid-cols-2 gap-5 md:grid-cols-4'>
 
           {visaData.map((country, ind) => (
             <Link key={ind}  href={`/visa/${country?.id}`}
