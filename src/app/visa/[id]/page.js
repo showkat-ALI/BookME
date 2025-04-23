@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import getVisaDetails from "@/services/visa/getVisaDeatails";
 import getContactNumber from "@/services/tour/getContactNumber";
-import VisaInfoSubmitForm from "@/app/components/visa/visaInfoSubmitForm";
 import { TbCurrentLocation } from "react-icons/tb";
 import { IoTime } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
@@ -18,22 +17,79 @@ export default function VisaDetailsPage({ params }) {
   const [visaDetails, setVisaDetails] = useState(null);
   const [contactNumber, setContactNumber] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     async function fetchData() {
-      const [details, contact] = await Promise.all([
-        getVisaDetails(id),
-        getContactNumber()
-      ]);
-      setVisaDetails(details);
-      setContactNumber(contact);
+      try {
+        const [details, contact] = await Promise.all([
+          getVisaDetails(id),
+          getContactNumber()
+        ]);
+        setVisaDetails(details);
+        setContactNumber(contact);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchData();
   }, [id]);
 
-  if (!visaDetails) return <div className="p-4">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="bg-[#FAFAFA] text-[#333] font-sans">
+        {/* Skeleton for Hero Image */}
+        <div className="h-[550px] bg-gray-200 animate-pulse" />
+  
+        <div className="max-w-[75%] mx-auto px-4 py-[4.5rem] grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Skeleton for Main Content */}
+          <div className="lg:col-span-7 xl:col-span-8 space-y-6">
+            <div className="h-6 bg-gray-300 rounded w-2/3 animate-pulse" />
+            <div className="h-10 bg-gray-300 rounded w-1/2 animate-pulse" />
+            <div className="flex space-x-3 mt-3">
+              <div className="w-24 h-6 bg-gray-200 rounded animate-pulse" />
+              <div className="w-24 h-6 bg-gray-200 rounded animate-pulse" />
+            </div>
+            <div className="bg-white rounded-lg p-4 mt-6 shadow-md space-y-4">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="space-y-2">
+                  <div className="w-1/3 h-6 bg-gray-300 rounded animate-pulse" />
+                  <div className="h-20 bg-gray-200 rounded animate-pulse" />
+                </div>
+              ))}
+            </div>
+          </div>
+  
+          {/* Sidebar Skeletons */}
+          <div className="lg:col-span-4 xl:col-span-4 space-y-6">
+            <div className="bg-[#ffeedb] border p-5 rounded-lg space-y-4 animate-pulse">
+              <div className="h-6 bg-gray-300 rounded w-3/4" />
+              <div className="h-4 bg-gray-200 rounded w-full" />
+              <div className="h-10 bg-orange-300 rounded" />
+            </div>
+  
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="bg-white border rounded shadow-md p-4 space-y-4 animate-pulse">
+                <div className="h-6 bg-gray-300 rounded w-2/3" />
+                <div className="flex gap-4">
+                  <div className="flex-1 h-6 bg-gray-200 rounded" />
+                  <div className="flex-1 h-6 bg-gray-200 rounded" />
+                </div>
+                <div className="h-6 bg-yellow-300 rounded w-1/2" />
+              </div>
+            ))}
+  
+            <div className="hidden md:block h-40 bg-gray-200 rounded animate-pulse" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
 
   return (
     <div className="bg-[#FAFAFA] text-[#333] font-sans">
@@ -49,26 +105,33 @@ export default function VisaDetailsPage({ params }) {
         />
       </div>
 
-      <div className="max-w-[85%] mx-auto px-4 py-[4.5rem] grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="max-w-[75%] mx-auto px-4 py-[4.5rem] grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-7 xl:col-span-8">
-          {/* Title and Summary */}
+         
           <h2 className="text-xl text-gray-600 font-normal">{visaDetails?.property_name}</h2>
           <h1 className="text-4xl font-normal mt-1">{visaDetails?.property_name}</h1>
 
           <div className="flex flex-wrap items-center text-[20px] text-[#4C4C4C] gap-2 mt-3">
-            {visaDetails?.property_summaries?.map((details,index) => (
-              <div key={details?.id||index} className="flex items-center">
+            {visaDetails?.property_summaries?.map((details, index) => (
+              <div key={details?.id || index} className="flex items-center">
                 <span className="mr-2">
-                  {details?.id === 420 ? <TbCurrentLocation className="w-5 h-5" /> : null}
-                  {details?.id === 421 ? <IoTime className="w-5 h-5" /> : null}
+                  {index === 1 ? <TbCurrentLocation className="w-5 h-5" /> : ""}
+                  {index === 2 ? <IoTime className="w-5 h-5" /> : ""}
                 </span>
-                <span className="">{details?.value}</span>
+                <span className="">
+            {
+              index===1?"Currency ":index===2?"Local time ":null
+            }
+                <span className="font-bold">
+                    {details?.value}
+                    </span>
+                    </span>
               </div>
             ))}
           </div>
 
-          {/* Facilities */}
-          <div className="bg-white  rounded-lg p-4 mt-6 shadow-sm">
+          
+          <div className="bg-white  rounded-lg p-4 mt-6 shadow-md">
             {visaDetails?.facilities?.map((facility,index) => (
               <div key={facility?.id||index} className="mb-6">
                 <h3 className="text-3xl font-semibold mb-3">{facility?.facilty_name}</h3>
@@ -118,7 +181,7 @@ export default function VisaDetailsPage({ params }) {
             <div  className="bg-white border rounded shadow-md p-4">
               <h1 className="font-medium text-lg mb-1">
                 {unit?.unit_name}
-                <span className="ml-2 text-gray-600">Type: {unit?.unit_name}</span>
+                <span className="ml-2 text-gray-600">Type: {unit?.unit_type}</span>
               </h1>
               <div className="text-sm space-y-1 my-2">
                 <div className="flex mb-4">
@@ -131,7 +194,7 @@ export default function VisaDetailsPage({ params }) {
                     <div className="text-base font-bold">30 Days</div>
                   </div>
                 </div>
-                <p className="text-lg font-semibold">BDT {unit?.price[0]?.price} <span className="text-xs font-thin">/person</span></p>
+                <p className="text-lg font-semibold">BDT {Math.ceil(unit?.price[0]?.price)} <span className="text-base font-light">/person</span></p>
               </div>
               <p className="text-[#f59d3f]  text-sm mt-2">
                 ⚠️ Please contact Visa department for Document processing.
@@ -181,7 +244,7 @@ export default function VisaDetailsPage({ params }) {
     Request Visa Assistance
   </button>
 </div>
-<div className="hidden md:block">
+<div className="hidden md:block shadow-md">
           <ContactForm category={"visa"} propertyDetails={visaDetails?.property_name} headline={"Request Visa Assistance"}/>
   </div>
 

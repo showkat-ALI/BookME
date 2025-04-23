@@ -12,19 +12,65 @@ export default async function Home() {
   let countryData = [];
   let visaData = [];
   let contactNumber = [];
+  let loading = false;
+
   try {
+    loading = true;
     const countryResult = await getAllCountry();
     const visaResult = await getAllVisa();
     const contactnumber = await getContactNumber();
-
+  
     countryData = countryResult;
     visaData = visaResult;
     contactNumber = contactnumber;
+    loading = false;
   } catch (error) {
     console.error("Failed to fetch data:", error);
+    loading = false;
   }
-console.log(visaData)
-console.log(countryData)
+  if (loading) {
+    return (
+      <div className="min-h-screen font-sans">
+        {/* Background skeleton */}
+        <div className="h-[60vh] bg-gray-300 animate-pulse" />
+  
+        {/* Search Form Skeleton */}
+        <div className="bg-white py-8">
+          <main className="container mx-auto px-4 flex flex-col items-center">
+            <div className="w-full max-w-3xl space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-12 bg-gray-200 rounded animate-pulse" />
+              ))}
+              <div className="w-32 h-10 bg-gray-300 rounded animate-pulse mx-auto" />
+            </div>
+          </main>
+        </div>
+  
+        {/* Grid Skeleton */}
+        <div className="container mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">Popular Visa Destinations</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            {[...Array(4)].map((_, i) => (
+              <div
+                key={i}
+                className="relative bg-white shadow-md rounded-lg overflow-hidden animate-pulse"
+              >
+                <div className="h-48 bg-gray-300" />
+                <div className="p-4 space-y-2">
+                  <div className="h-5 bg-gray-300 rounded w-3/4" />
+                  <div className="h-4 bg-gray-200 rounded w-1/2" />
+                  <div className="h-4 bg-gray-200 rounded w-2/3" />
+                  <div className="h-5 bg-gray-300 rounded w-1/4 mt-4" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+
   return (
     <div className="min-h-screen font-sans">
       {/* Background image section */}
@@ -62,7 +108,7 @@ console.log(countryData)
               className="relative max-w-[500px] bg-white shadow-xl rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
             >
               {/* Image Container */}
-              <div className="relative h-48 w-[250px]">
+              <div className="relative h-48 min-w-[250px]">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${country?.image}`}
                   alt={country?.name}
@@ -89,13 +135,29 @@ console.log(countryData)
                       <p className="flex items-center">
                         <TbCurrentLocation className="w-4 h-4 mr-1" />
                         <span className="text-gray-700 font-semibold text-sm md:text-base">
+                          <span className='mr-[3px]'>
+                          Currency  
+
+                          </span>
+                          <span className='font-bold'>
+
                           {property?.property_summaries[1]?.value}
+                          </span>
+
                         </span>
                       </p>
                       <p className="flex items-center">
                         <IoTime className="w-4 h-4 mr-1" />
                         <span className="text-gray-700 font-semibold text-sm md:text-base">
+                          <span className='mr-[3px]'>
+
+                          Local time 
+
+                          </span>
+                          <span className='font-bold'>
                           {property?.property_summaries[2]?.value}
+
+                          </span>
                         </span>
                       </p>
                     </div>
@@ -103,33 +165,11 @@ console.log(countryData)
                 ))}
 
                 <p className="text-lg font-semibold mt-2">
-                  <span className="text-sky-500">BDT {country?.properties[0]?.property_uinit[0]?.price[0]?.price}</span>
-                  <span className="text-xs font-thin ml-1">/person</span>
+                  <span className="text-sky-500">BDT {Math.ceil(country?.properties[0]?.property_uinit[0]?.price[0]?.price)}</span>
+                  <span className="text-sm font-light ml-1">/person</span>
                 </p>
 
-                {/* <div className="flex flex-wrap gap-2 mt-4">
-                  <Link
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`tel:${contactNumber?.Phone}`}
-                    className="flex-1 min-w-[100px]"
-                  >
-                    <div className="flex border border-blue-950 justify-center rounded-full text-black text-center text-sm items-center px-3 py-2 hover:bg-blue-50 transition-colors">
-                      Call Now
-                    </div>
-                  </Link>
-                  <Link
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://wa.me/${contactNumber?.Phone}`}
-                    className="flex-1 min-w-[120px]"
-                  >
-                    <div className="flex border border-blue-950 justify-center rounded-full text-black text-sm gap-2 items-center px-3 py-2 hover:bg-blue-50 transition-colors">
-                      <FaWhatsapp className="text-base text-green-500" />
-                      Book Now
-                    </div>
-                  </Link>
-                </div> */}
+            
               </div>
             </div>
             </Link>
