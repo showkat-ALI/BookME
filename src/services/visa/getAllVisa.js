@@ -4,6 +4,7 @@ const getAllVisa = async () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/countries/visa`
       );
       const propertyPackages = await response.json();
+      console.log(propertyPackages)
       
       return propertyPackages;
     } catch (error) {

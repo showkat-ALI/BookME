@@ -303,7 +303,7 @@ console.log(propertyPackages)
                       >
                         Get consultancy/Get a call
                       </h1>
-                      <ContactForm propertyDetails={propertyDetails} />
+                      <ContactForm category={"tour"} propertyDetails={propertyDetails[0]?.property_name} headline={""} />
                     </div>
                   </div>
                 </div>

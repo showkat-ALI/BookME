@@ -23,7 +23,8 @@ export default async function Home() {
   } catch (error) {
     console.error("Failed to fetch data:", error);
   }
-
+console.log(visaData)
+console.log(countryData)
   return (
     <div className="min-h-screen font-sans">
       {/* Background image section */}
@@ -41,7 +42,7 @@ export default async function Home() {
       </div>
 
       {/* Search form */}
-      <div className="bg-white py-8 shadow-md">
+      <div className="bg-white py-8">
         <main className="container mx-auto px-4 flex flex-col items-center">
           <VisaSearchForm countryData={countryData} />
         </main>
@@ -50,14 +51,18 @@ export default async function Home() {
       {/* Visa Countries Grid */}
       <div className="container mx-auto px-4 py-12">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">Popular Visa Destinations</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="flex justify-center items-center ">
+          <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
+
           {visaData.map((country, ind) => (
+            <Link key={ind}  href={`/visa/${country?.id}`}
+            className="cursor-pointer">
             <div
               key={ind}
-              className="relative bg-white shadow-xl rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+              className="relative max-w-[500px] bg-white shadow-xl rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
             >
               {/* Image Container */}
-              <div className="relative h-48 w-full">
+              <div className="relative h-48 w-[250px]">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${country?.image}`}
                   alt={country?.name}
@@ -102,7 +107,7 @@ export default async function Home() {
                   <span className="text-xs font-thin ml-1">/person</span>
                 </p>
 
-                <div className="flex flex-wrap gap-2 mt-4">
+                {/* <div className="flex flex-wrap gap-2 mt-4">
                   <Link
                     target="_blank"
                     rel="noopener noreferrer"
@@ -124,10 +129,14 @@ export default async function Home() {
                       Book Now
                     </div>
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
+            </Link>
+
           ))}
+          </div>
+
         </div>
       </div>
     </div>

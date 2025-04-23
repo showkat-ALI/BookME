@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import postPackageInfo from "@/services/tour/postPacageInfo";
 
-const ContactForm = ({ propertyDetails }) => {
+const ContactForm = ({ propertyDetails,category,headline }) => {
   const {
     register,
     handleSubmit,
@@ -27,7 +27,8 @@ const ContactForm = ({ propertyDetails }) => {
       number: data.phoneNumber,
       address: data.address,
       additional_info: data.additionalInfo,
-      property_name: propertyDetails[0]?.property_name,
+      property_name: propertyDetails,
+      category:category
     };
 
     try {
@@ -52,6 +53,7 @@ const ContactForm = ({ propertyDetails }) => {
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white ">
+<h1 className="text-2xl font-semibold text-[#3d5afc]">{headline}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 gap-4">
           {/* First Name */}

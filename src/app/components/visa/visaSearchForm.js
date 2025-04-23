@@ -106,45 +106,52 @@ export default function VisaSearchForm({ countryData }) {
                          
           {/* Travelers */}
           <div 
-            className="px-3 cursor-pointer py-2 rounded-lg border border-gray-200 flex-1 min-w-[150px]"
-            onClick={() => setIsEditing(true)}
-            ref={counterRef}
-          >
-            <div className="text-xs md:text-base text-gray-500 mb-1">Traveler</div>
-            <div className="flex items-center relative cursor-pointer">
-              <div className={`transition-all duration-300 ${isEditing ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'}`}>
-                <span className="text-sm font-bold mr-2">{travelers}</span>
-                <span className="text-xs md:text-sm">Bangladeshi</span>
-              </div>
-              <div className={`flex items-center transition-all duration-300 ${isEditing ? 'opacity-100 scale-100' : 'opacity-0 scale-95 absolute'}`}>
-                <button 
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    decrementTravelers();
-                  }}
-                  className="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
-                  disabled={travelers <= 1}
-                >
-                  -
-                </button>
-                <span className="text-sm font-bold mx-2 w-6 text-center">{travelers}</span>
-                <button 
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    incrementTravelers();
-                  }}
-                  className="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
-                  disabled={travelers >= 10}
-                >
-                  +
-                </button>
-                <span className="text-xs md:text-sm ml-2">Bangladeshi</span>
-              </div>
-            </div>
-          </div>
-        </div>
+  className="px-3 flex cursor-pointer py-2 rounded-lg border border-gray-200 flex-1 min-w-[150px] relative h-[60px]"
+  onClick={() => setIsEditing(true)}
+  ref={counterRef}
+>
+  {/* Container to maintain consistent dimensions */}
+  <div className="flex items-center w-full h-full">
+    {/* Non-editing content */}
+    <div className={`flex items-center w-full h-full transition-all duration-300 ${isEditing ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'}`}>
+      <span className="font-semibold mr-2 ">{String(travelers).padStart(2, '0')}</span>
+      <div className="w-[1px] h-6 bg-gray-300 mx-2"></div>
+      <div className="flex flex-col">
+        <div className="font-bold  text-gray-500">Travelers</div>
+        <div className="text-xs font-semibold">Bangladeshi</div>
+      </div>
+    </div>
+
+    {/* Editing controls - centered vertically and horizontally */}
+    <div className={`flex items-center justify-center w-full h-full transition-all duration-300 ${isEditing ? 'opacity-100 scale-100' : 'opacity-0 scale-95 absolute'}`}>
+      <div className="flex items-center">
+        <button 
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            decrementTravelers();
+          }}
+          className="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+          disabled={travelers <= 1}
+        >
+          -
+        </button>
+        <span className="text-sm font-bold mx-2 w-6 text-center">{String(travelers).padStart(2, '0')}</span>
+        <button 
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            incrementTravelers();
+          }}
+          className="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+          disabled={travelers >= 10}
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+</div> </div>
 
         {/* Search Button */}
         <button 
