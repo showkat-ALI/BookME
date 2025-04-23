@@ -43,6 +43,8 @@ export default function VisaDetailsPage({ params }) {
           src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${visaDetails?.main_img}`}
           alt={visaDetails?.property_name}
           fill
+          className="object-fill"
+
           
         />
       </div>
