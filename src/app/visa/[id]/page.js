@@ -38,12 +38,12 @@ export default function VisaDetailsPage({ params }) {
   return (
     <div className="bg-[#FAFAFA] text-[#333] font-sans">
       {/* Hero Image */}
-      <div className=" h-[400px] ">
+      <div className=" h-[550px] relative ">
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${visaDetails?.main_img}`}
           alt={visaDetails?.property_name}
           fill
-          className="object-cover"
+          className="object-fill"
 
           
         />
