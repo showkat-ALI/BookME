@@ -53,7 +53,7 @@ export default function VisaSearchForm({ countryData }) {
   };
 
   return (
-    <form onSubmit={handleSearch} className="relative -mt-10 md:-mt-20 w-full bg-white max-w-4xl px-3 py-2 md:px-4 md:py-3 rounded-lg shadow-md overflow-visible mx-auto">
+    <form onSubmit={handleSearch} className=" text-black relative -mt-10 md:-mt-20 w-full bg-white max-w-4xl px-3 py-2 md:px-4 md:py-3 rounded-lg shadow-md overflow-visible mx-auto">
       <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4">
         {/* Departure */}
         <div className='flex flex-1 flex-col sm:flex-row gap-2 sm:gap-4'>
@@ -111,7 +111,7 @@ export default function VisaSearchForm({ countryData }) {
   ref={counterRef}
 >
   {/* Container to maintain consistent dimensions */}
-  <div className="flex items-center w-full h-full">
+  <div className="flex items-center w-full h-full text-black">
     {/* Non-editing content */}
     <div className={`flex items-center w-full h-full transition-all duration-300 ${isEditing ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'}`}>
       <span className="font-semibold mr-2 ">{String(travelers).padStart(2, '0')}</span>

@@ -112,22 +112,24 @@ export default function VisaDetailsPage({ params }) {
           <h1 className="text-4xl font-normal mt-1">{visaDetails?.property_name}</h1>
 
           <div className="flex flex-wrap items-center text-[20px] text-[#4C4C4C] gap-2 mt-3">
-            {visaDetails?.property_summaries?.map((details, index) => (
-              <div key={details?.id || index} className="flex items-center">
-                <span className="mr-2">
-                  {index === 1 ? <TbCurrentLocation className="w-5 h-5" /> : ""}
-                  {index === 2 ? <IoTime className="w-5 h-5" /> : ""}
-                </span>
-                <span className="">
-            {
-              index===1?"Currency ":index===2?"Local time ":null
-            }
-                <span className="font-bold">
-                    {details?.value}
-                    </span>
-                    </span>
-              </div>
-            ))}
+          {visaDetails?.property_summaries?.slice().reverse().map((details, index) => (
+  <div key={details?.id || index} className="flex items-center">
+    <span className="mr-2">
+      {index === 2 ? <TbCurrentLocation className="w-5 h-5" /> : ""}
+      {index === 1 ? <IoTime className="w-5 h-5" /> : ""}
+    </span>
+    <span className="">
+      {
+        index===1 ? "Local time " : index===2 ? "Currency " : null
+      }
+      <span className="font-bold">
+        {
+          details?.value 
+        }
+      </span>
+    </span>
+  </div>
+))}
           </div>
 
           

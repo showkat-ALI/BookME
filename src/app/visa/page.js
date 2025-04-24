@@ -96,13 +96,13 @@ export default async function Home() {
 
       {/* Visa Countries Grid */}
       <div className="container mx-auto px-4 py-12">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">Popular Visa Destinations</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-black">Popular Visa Destinations</h2>
         <div className="flex justify-center items-center ">
           <div className='grid grid-cols-2 gap-5 md:grid-cols-4'>
 
           {visaData.map((country, ind) => (
             <Link key={ind}  href={`/visa/${country?.id}`}
-            className="cursor-pointer">
+            className="cursor-pointer text-black">
             <div
               key={ind}
               className="relative max-w-[500px] bg-white shadow-xl rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
@@ -128,12 +128,12 @@ export default async function Home() {
                   <div className="mb-3" key={idx}>
                     <div>
                       <p className="text-gray-700 font-semibold text-sm md:text-base">
-                        {property?.property_summaries[0]?.value}
+                        {property?.property_summaries[2]?.value}
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-4 mt-2">
                       <p className="flex items-center">
-                        <TbCurrentLocation className="w-4 h-4 mr-1" />
+                        <TbCurrentLocation className="w-4 h-4 mr-1 text-black" />
                         <span className="text-gray-700 font-semibold text-sm md:text-base">
                           <span className='mr-[3px]'>
                           Currency  
@@ -141,13 +141,13 @@ export default async function Home() {
                           </span>
                           <span className='font-bold'>
 
-                          {property?.property_summaries[1]?.value}
+                          {property?.property_summaries[0]?.value}
                           </span>
 
                         </span>
                       </p>
                       <p className="flex items-center">
-                        <IoTime className="w-4 h-4 mr-1" />
+                        <IoTime className="w-4 h-4 mr-1 text-black" />
                         <span className="text-gray-700 font-semibold text-sm md:text-base">
                           <span className='mr-[3px]'>
 
@@ -155,7 +155,7 @@ export default async function Home() {
 
                           </span>
                           <span className='font-bold'>
-                          {property?.property_summaries[2]?.value}
+                          {property?.property_summaries[1]?.value}
 
                           </span>
                         </span>
