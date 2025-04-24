@@ -40,8 +40,10 @@ export default function Property() {
     async function fetchData() {
       try {
         setLoading(true);
-        const result = await propertySummary();
-        setData(result);
+        const isSundarban = window.location.pathname.includes('sundarban');
+    const locationId = isSundarban ? 2 : 1;
+        const result = await propertySummary(locationId);
+        setData(result);  
       } catch (error) {
         console.error("Error fetching property data:", error);
       } finally {

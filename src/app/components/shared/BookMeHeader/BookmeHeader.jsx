@@ -10,18 +10,32 @@ import { useSearch } from "@/SearchContext";
 import getContactNumber from "@/services/tour/getContactNumber";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
 import { usePagination } from "@/services/tour/usePagination";
+import { useRouter } from "next/navigation";
+
 const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
 const BookMeHeader = () => {
   const { searchTerm, setSearchTerm } = useSearch();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [contactNumber, setContactNumber] = useState([]);
   const { currentPage, handlePageChange } = usePagination();
+    const router = useRouter();
+  
   const handleClick = () => {
     handlePageChange(1);
      // Reset pagination before navigating home
   };
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+  const handleSundarbanClick = () => {
+    // Option 1: Simple string path
+    // router.replace('/sundarban');
+    
+    // // Option 2: Using URL object (correct format)
+    // router.replace({
+    //   pathname: '/sundarban',
+    //   query: {} // you can add query params if needed
+    // });
   };
   const {
     register,
@@ -70,6 +84,11 @@ className="cursor-pointer"
               >
                 visa
               </Link>
+              {/* <button
+             onClick={handleSundarbanClick()}
+              >
+                sundarban
+              </button> */}
               {/* <div className="hidden lg:block">
                 <form
                   onSubmit={handleSubmit(onSubmit)}
