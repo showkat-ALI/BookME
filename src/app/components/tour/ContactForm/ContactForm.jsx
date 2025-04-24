@@ -170,6 +170,10 @@ const ContactForm = ({ propertyDetails,category,headline }) => {
           <button
             type="submit"
             className="mt-4 p-2 bg-blue-500 text-white rounded-md"
+            style={{
+              background:
+                "linear-gradient(90deg, #313881, #0678B4)",
+            }}
           >
             Submit
           </button>

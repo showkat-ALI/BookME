@@ -41,7 +41,7 @@ export default function VisaDetailsPage({ params }) {
 
   if (loading) {
     return (
-      <div className="bg-[#FAFAFA] text-[#333] font-sans">
+      <div className="bg-[#FAFAFA] text-[#333] ">
         {/* Skeleton for Hero Image */}
         <div className="h-[550px] bg-gray-200 animate-pulse" />
   
@@ -92,7 +92,7 @@ export default function VisaDetailsPage({ params }) {
   
 
   return (
-    <div className="bg-[#FAFAFA] text-[#333] font-sans">
+    <div className="bg-[#FAFAFA] text-[#333] ">
       {/* Hero Image */}
       <div className=" h-[550px] relative ">
         <Image
@@ -153,12 +153,16 @@ export default function VisaDetailsPage({ params }) {
             <h3 className="text-xl font-semibold text-black mb-2">Looking for Expert Visa Guidance?</h3>
             <p className="text-base text-black mb-4">Don&apos;t know where to begin? Share your details, and our consultants will assist you.</p>
             <div className="flex flex-col sm:flex-row gap-2">
-              <button className="bg-[#ff9626] text-white px-[12px] py-2 rounded hover:bg-[#D46B08]">
+              <button style={{
+                    background:
+                      "linear-gradient(90deg, #313881, #0678B4)",
+                  }} className=" text-white px-[12px] py-2 rounded hover:bg-[#D46B08]">
                 <Link
                   href={`https://wa.me/${contactNumber?.Phone}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[14px] font-bold"
+                  
                 >
                   REQUEST NOW
                 </Link>
@@ -204,6 +208,10 @@ export default function VisaDetailsPage({ params }) {
              
             </div>
              <button
+              style={{
+                background:
+                  "linear-gradient(90deg, #313881, #0678B4)",
+              }}
              
              className="mt-[-5px] w-full font-semibold bg-[#3a8ff0] text-white text-sm py-2 rounded hover:bg-blue-700"
            >
@@ -228,6 +236,10 @@ export default function VisaDetailsPage({ params }) {
       hover:shadow-xl hover:shadow-blue-600/50
       active:scale-95
     "
+    style={{
+      background:
+        "linear-gradient(90deg, #313881, #0678B4)",
+    }}
   >
     <svg 
       className="w-5 h-5 mr-2" 

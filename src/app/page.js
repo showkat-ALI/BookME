@@ -1,10 +1,14 @@
 import Banner from "./components/tour/Banner/Banner";
 import Property from "./components/tour/Property/Property";
 
+import { Roboto } from "next/font/google";
+const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
+
 
 export default  function Home() {
+  
   return (
-    <main className=" ">
+    <main className={`${roboto.className}`}>
       <div className=" w-[100%] pt-[40px] md:pt-[50px]">
         <Banner />
       </div>

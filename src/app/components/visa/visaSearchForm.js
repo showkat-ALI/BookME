@@ -53,7 +53,7 @@ export default function VisaSearchForm({ countryData }) {
   };
 
   return (
-    <form onSubmit={handleSearch} className=" text-black relative -mt-10 md:-mt-20 w-full bg-white max-w-4xl px-3 py-2 md:px-4 md:py-3 rounded-lg shadow-md overflow-visible mx-auto">
+    <form onSubmit={handleSearch} className="font- text-black relative -mt-10 md:-mt-20 w-full bg-white max-w-4xl px-3 py-2 md:px-4 md:py-3 rounded-lg shadow-md overflow-visible mx-auto">
       <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4">
         {/* Departure */}
         <div className='flex flex-1 flex-col sm:flex-row gap-2 sm:gap-4'>
@@ -114,8 +114,8 @@ export default function VisaSearchForm({ countryData }) {
   <div className="flex items-center w-full h-full text-black">
     {/* Non-editing content */}
     <div className={`flex items-center w-full h-full transition-all duration-300 ${isEditing ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'}`}>
-      <span className="font-semibold mr-2 ">{String(travelers).padStart(2, '0')}</span>
-      <div className="w-[1px] h-6 bg-gray-300 mx-2"></div>
+      <span className="font-semibold mr-2 text-lg">{String(travelers).padStart(2, '0')}</span>
+      <div className="w-[1px] h-full bg-gray-700 mx-2"></div>
       <div className="flex flex-col">
         <div className="font-bold  text-gray-500">Travelers</div>
         <div className="text-xs font-semibold">Bangladeshi</div>
@@ -131,19 +131,30 @@ export default function VisaSearchForm({ countryData }) {
             e.stopPropagation();
             decrementTravelers();
           }}
-          className="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+          style={{
+            background:
+              "linear-gradient(90deg, #313881, #0678B4)",
+          }}
+          className="w-[25px] h-[30px] flex justify-center items-center text-center text-3xl  rounded-lg text-white font-bold transition-colors"
           disabled={travelers <= 1}
         >
+          <span className='text-center'>
           -
+            </span>
+          
         </button>
-        <span className="text-sm font-bold mx-2 w-6 text-center">{String(travelers).padStart(2, '0')}</span>
+        <span className="text-lg font-bold mx-2 w-6 text-center">{String(travelers).padStart(2, '0')}</span>
         <button 
           type="button"
           onClick={(e) => {
             e.stopPropagation();
             incrementTravelers();
           }}
-          className="w-6 h-6 flex items-center justify-center rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+          style={{
+            background:
+              "linear-gradient(90deg, #313881, #0678B4)",
+          }}
+          className="w-[25px] h-[30px] flex justify-center items-center text-center text-3xl  rounded-lg text-white font-bold transition-colors"
           disabled={travelers >= 10}
         >
           +
@@ -156,6 +167,10 @@ export default function VisaSearchForm({ countryData }) {
         {/* Search Button */}
         <button 
         // href={`/visa/${selectedCountry?.id}`}
+        style={{
+          background:
+            "linear-gradient(90deg, #313881, #0678B4)",
+        }}
           type="submit" 
           className="px-3 py-2 rounded-lg bg-blue-500 flex items-center justify-center cursor-pointer min-w-[40px] sm:min-w-[50px] hover:bg-blue-600 transition-colors"
         >

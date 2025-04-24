@@ -72,7 +72,7 @@ export default async function Home() {
   
 
   return (
-    <div className="min-h-screen font-sans">
+    <div className="min-h-screen">
       {/* Background image section */}
       <div 
         className="h-[60vh] w-full bg-cover bg-center relative"
